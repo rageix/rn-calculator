@@ -1,4 +1,4 @@
-# calculator
+# React Native Calculator
 
 <img src="./assets/screenshot.webp" alt="screenshot" width="200px" height="auto"/>
 
