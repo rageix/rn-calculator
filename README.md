@@ -4,8 +4,8 @@
 
 ## About
 
-This repo is a demo application for React Native based on the iOS stock calculator. This project targets iOS, but also 
-works on the web. It should work fine on Android but is untested on that platform.
+This repo is a demo application for [React Native](https://reactnative.dev/) based on the iOS stock calculator. 
+This project targets iOS, but also works on the web. It should work fine on Android but is untested on that platform.
 
 This project makes use of [Tailwinds](https://tailwindcss.com) for styling via the 
 [tailwind-rn](https://github.com/vadimdemedes/tailwind-rn) package.
@@ -17,7 +17,7 @@ This project makes use of [Tailwinds](https://tailwindcss.com) for styling via t
 
 ### To run the web version
 
-1. ``
+1. `npm run dev:tailwind`
 2. `npm run web`.
 
 ## Expo
