@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "expo-ts-test",
+    "name": "calculator",
     "slug": "calculator",
     "version": "1.0.0",
     "orientation": "portrait",

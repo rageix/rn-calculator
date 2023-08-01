@@ -8,19 +8,14 @@
   margin-right: -0.625rem
 }
 
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem
-}
-
-.mx-2\.5 {
-  margin-left: 0.625rem;
-  margin-right: 0.625rem
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto
+}
+
+.-mx-1 {
+  margin-left: -0.25rem;
+  margin-right: -0.25rem
 }
 
 .flex {
@@ -59,12 +54,20 @@
   max-width: 42rem
 }
 
-.max-w-\[25\%\] {
-  max-width: 25%
-}
-
 .max-w-full {
   max-width: 100%
+}
+
+.max-w-md {
+  max-width: 28rem
+}
+
+.max-w-lg {
+  max-width: 32rem
+}
+
+.max-w-xl {
+  max-width: 36rem
 }
 
 .flex-row {
@@ -160,18 +163,38 @@
   padding-bottom: 0.625rem
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px
+}
+
+.px-0\.5 {
+  padding-left: 0.125rem;
+  padding-right: 0.125rem
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px
+}
+
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem
+}
+
 .text-right {
   text-align: right
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem
-}
-
-.text-8xl {
-  font-size: 6rem;
-  line-height: 6rem
 }
 
 .text-3xl {
@@ -179,9 +202,9 @@
   line-height: 2.25rem
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem
+.text-8xl {
+  font-size: 6rem;
+  line-height: 6rem
 }
 
 .text-amber-500 {

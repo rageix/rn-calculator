@@ -1,9 +1,5 @@
-
-import Calculator from "./Calculator/Calculator";
+import Calculator from './Calculator/Calculator';
 
 export default function MainView() {
-
-  return (
-    <Calculator/>
-  );
+  return <Calculator />;
 }

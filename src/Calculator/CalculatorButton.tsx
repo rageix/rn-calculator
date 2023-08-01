@@ -1,19 +1,15 @@
 import { Pressable, Text, View } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
-import {PropsWithChildren, useState} from 'react';
-
-const ACTION_BUTTON_BACKGROUND = 'bg-amber-600';
-const ACTION_BUTTON_PRESS_BACKGROUND = 'bg-amber-500';
-const ACTION_BUTTON_ACTIVE_BACKGROUND = 'bg-amber-200';
-const ACTION_BUTTON_ACTIVE_PRESS_BACKGROUND = 'bg-amber-500';
+import { PropsWithChildren, useState } from 'react';
 
 export interface IProps extends PropsWithChildren {
   label: string;
-  onPress: () => any;
+  onPress: () => void;
   widthClass?: string;
   bgClass?: string;
   bgPressedClass?: string;
   fontColorClass?: string;
+  accessibilityHint?: string;
 }
 
 const defaultProps: Partial<IProps> = {
@@ -21,7 +17,7 @@ const defaultProps: Partial<IProps> = {
   bgClass: 'bg-gray-700',
   bgPressedClass: 'bg-slate-600',
   fontColorClass: 'text-white',
-}
+};
 
 export interface IState {
   pressed: boolean;
@@ -35,7 +31,7 @@ export default function CalculatorButton(props: IProps) {
   const tailwind = useTailwind();
 
   const [state, updateState] = useState<IState>(defaultState);
-  props = {...defaultProps, ...props};
+  props = { ...defaultProps, ...props };
 
   function onPressIn() {
     updateState({
@@ -50,8 +46,13 @@ export default function CalculatorButton(props: IProps) {
   }
 
   return (
-    <View style={tailwind(`flex justify-center items-center h-1/5 px-2.5 py-2.5 ${props.widthClass}`)}>
+    <View
+      style={tailwind(
+        `flex justify-center items-center h-1/5 px-0.5 py-0.5 ${props.widthClass}`,
+      )}
+    >
       <Pressable
+        accessibilityHint={props.accessibilityHint || props.label}
         style={tailwind(
           `w-full h-full rounded-lg flex justify-center items-center ${
             state.pressed ? props.bgPressedClass : props.bgClass
@@ -61,7 +62,9 @@ export default function CalculatorButton(props: IProps) {
         onPressIn={onPressIn}
         onPressOut={onPressOut}
       >
-        <Text style={tailwind(`${props.fontColorClass} text-3xl`)}>{props.label}</Text>
+        <Text style={tailwind(`${props.fontColorClass} text-3xl`)}>
+          {props.label}
+        </Text>
       </Pressable>
     </View>
   );

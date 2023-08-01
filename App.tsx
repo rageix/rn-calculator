@@ -6,6 +6,7 @@ export default function App() {
   return (
     <>
       {/* TailwindProvider does not have the proper definitions so ignore. */}
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore*/}
       <TailwindProvider utilities={utilities}>
         <MainView />

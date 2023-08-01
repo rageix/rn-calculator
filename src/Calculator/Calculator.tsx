@@ -2,9 +2,10 @@ import { Platform, SafeAreaView, Text, View } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
 import CalculatorButton, { IProps as IButtonProps } from './CalculatorButton';
 import Controller from './Controller';
-import { EAction } from './enums';
+import { EAction } from './Enums';
 
 let controller: Controller;
+
 const ACTION_BUTTON_BACKGROUND = 'bg-amber-600';
 const ACTION_BUTTON_PRESS_BACKGROUND = 'bg-amber-500';
 const ACTION_BUTTON_ACTIVE_BACKGROUND = 'bg-amber-200';
@@ -52,7 +53,7 @@ export default function Calculator() {
   return (
     <SafeAreaView
       style={tailwind(
-        `max-w-2xl h-full w-full mx-auto ${
+        `max-w-xl h-full w-full mx-auto ${
           Platform.OS !== 'web' ? 'bg-slate-950' : ''
         }`,
       )}
@@ -62,37 +63,38 @@ export default function Calculator() {
           <Text
             style={tailwind('w-full text-right text-white text-8xl')}
             adjustsFontSizeToFit={true}
+            accessibilityHint="display"
           >
             {state.buffer}
           </Text>
         </View>
-        <View
-          style={tailwind(
-            'h-2/3 flex flex-row justify-evenly flex-wrap -mx-2.5',
-          )}
-        >
+        <View style={tailwind('h-2/3 flex flex-row justify-evenly flex-wrap')}>
           <View
             style={tailwind(
-              'h-full flex flex-row justify-evenly flex-wrap px-2.5 w-full max-w-full',
+              'h-full flex flex-row justify-evenly flex-wrap px-0.5 w-full max-w-full',
             )}
           >
             <CalculatorButton
               label="C"
+              accessibilityHint="clear"
               onPress={controller.onPressClear}
               {...OTHER_BUTTON_PROPS}
             />
             <CalculatorButton
               label="+/-"
+              accessibilityHint="flip positive / negative"
               onPress={controller.onPressFlip}
               {...OTHER_BUTTON_PROPS}
             />
             <CalculatorButton
               label="%"
+              accessibilityHint="percent"
               onPress={controller.onPressPercent}
               {...OTHER_BUTTON_PROPS}
             />
             <CalculatorButton
               label="/"
+              accessibilityHint="divide"
               onPress={() => controller.onPressAction(EAction.Divide)}
               {...actionButtonProps(EAction.Divide, state.action)}
             />
@@ -110,6 +112,7 @@ export default function Calculator() {
             />
             <CalculatorButton
               label="x"
+              accessibilityHint="multiply"
               onPress={() => controller.onPressAction(EAction.Multiply)}
               {...actionButtonProps(EAction.Multiply, state.action)}
             />
@@ -127,6 +130,7 @@ export default function Calculator() {
             />
             <CalculatorButton
               label="-"
+              accessibilityHint="subtract"
               onPress={() => controller.onPressAction(EAction.Subtract)}
               {...actionButtonProps(EAction.Subtract, state.action)}
             />
@@ -144,6 +148,7 @@ export default function Calculator() {
             />
             <CalculatorButton
               label="+"
+              accessibilityHint="add"
               onPress={() => controller.onPressAction(EAction.Add)}
               {...actionButtonProps(EAction.Add, state.action)}
             />
@@ -154,10 +159,12 @@ export default function Calculator() {
             />
             <CalculatorButton
               label="."
+              accessibilityHint="decimal point"
               onPress={controller.onPressDecimal}
             />
             <CalculatorButton
               label="="
+              accessibilityHint="equals"
               onPress={controller.onPressEqual}
               bgClass={ACTION_BUTTON_BACKGROUND}
               bgPressedClass={ACTION_BUTTON_PRESS_BACKGROUND}

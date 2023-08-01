@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { EAction } from './enums';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { EAction } from './Enums';
+import Decimal from 'decimal.js';
 
 interface IState {
   total: number;
@@ -34,9 +35,11 @@ export default class CalculatorController {
   };
 
   onPressKey = (val: number) => {
-    let state: IState = { ...this.state };
+    const state: IState = { ...this.state };
     if (state.buffer === '0') {
       state.buffer = '';
+    } else if (state.buffer === '-0') {
+      state.buffer = '-';
     }
     if (state.actionClear) {
       state.memory = state.buffer;
@@ -48,7 +51,7 @@ export default class CalculatorController {
   };
 
   onPressAction = (action: EAction) => {
-    let state: IState = { ...this.state };
+    const state: IState = { ...this.state };
     if (!state.action) {
       state.actionClear = true;
     }
@@ -57,7 +60,7 @@ export default class CalculatorController {
   };
 
   onPressDecimal = () => {
-    let state: IState = { ...this.state };
+    const state: IState = { ...this.state };
     if (state.buffer.indexOf('.') === -1) {
       state.buffer += '.';
     }
@@ -65,7 +68,7 @@ export default class CalculatorController {
   };
 
   onPressFlip = () => {
-    let state: IState = { ...this.state };
+    const state: IState = { ...this.state };
     if (state.buffer.substring(0, 1) === '-') {
       state.buffer = state.buffer.substring(1);
     } else {
@@ -75,43 +78,46 @@ export default class CalculatorController {
   };
 
   onPressEqual = () => {
-    if(this.state.actionClear) {
+    if (this.state.actionClear || !this.state.memory) {
       return;
     }
 
-    let state: IState = { ...this.state };
-    let memory = parseFloat(state.memory);
-    let buffer = parseFloat(state.buffer);
-    let total: number;
+    const state: IState = { ...this.state };
+    const memory = new Decimal(state.memory);
+    const buffer = new Decimal(state.buffer);
+    let total: Decimal;
 
     switch (state.action) {
       case EAction.Add:
-        total = memory + buffer;
+        total = memory.add(buffer);
         break;
       case EAction.Subtract:
-        total = memory - buffer;
+        total = memory.minus(buffer);
         break;
       case EAction.Multiply:
-        total = memory * buffer;
+        total = memory.times(buffer);
         break;
       case EAction.Divide:
-        total = memory / buffer;
+        total = memory.dividedBy(buffer);
         break;
       default:
         return;
     }
 
-    state.buffer = String(total);
+    state.buffer = total.toString();
     state.action = null;
     this.setState(state);
   };
 
   onPressPercent = () => {
-    let state: IState = { ...this.state };
-    let memory = parseFloat(state.memory);
-    let buffer = parseFloat(state.buffer);
-    state.buffer = String(memory * (buffer / 100));
+    if (!this.state.action) {
+      return;
+    }
+
+    const state: IState = { ...this.state };
+    const memory = new Decimal(state.memory);
+    const buffer = new Decimal(state.buffer);
+    state.buffer = memory.times(buffer.dividedBy(100)).toString();
     this.setState(state);
   };
-
 }
