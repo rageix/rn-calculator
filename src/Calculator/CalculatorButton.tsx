@@ -61,7 +61,7 @@ export default function CalculatorButton(props: IProps) {
         onPressIn={onPressIn}
         onPressOut={onPressOut}
       >
-        <Text style={tailwind(`${props.fontColorClass} text-2xl`)}>{props.label}</Text>
+        <Text style={tailwind(`${props.fontColorClass} text-3xl`)}>{props.label}</Text>
       </Pressable>
     </View>
   );

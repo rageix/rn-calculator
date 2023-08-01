@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { Platform, SafeAreaView, Text, View } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
 import CalculatorButton, { IProps as IButtonProps } from './CalculatorButton';
 import Controller from './Controller';
@@ -50,10 +50,19 @@ export default function Calculator() {
   const state = controller.state;
 
   return (
-    <SafeAreaView style={tailwind('h-full w-full')}>
-      <View style={tailwind('max-w-2xl h-full w-full mx-auto bg-slate-950')}>
+    <SafeAreaView
+      style={tailwind(
+        `max-w-2xl h-full w-full mx-auto ${
+          Platform.OS !== 'web' ? 'bg-slate-950' : ''
+        }`,
+      )}
+    >
+      <View style={tailwind('h-full w-full bg-slate-950')}>
         <View style={tailwind('h-1/3 flex justify-end px-5')}>
-          <Text style={tailwind('w-full text-right text-white text-8xl')}>
+          <Text
+            style={tailwind('w-full text-right text-white text-8xl')}
+            adjustsFontSizeToFit={true}
+          >
             {state.buffer}
           </Text>
         </View>
@@ -64,7 +73,7 @@ export default function Calculator() {
         >
           <View
             style={tailwind(
-              'h-full flex flex-row justify-evenly flex-wrap mx-2.5',
+              'h-full flex flex-row justify-evenly flex-wrap px-2.5 w-full max-w-full',
             )}
           >
             <CalculatorButton

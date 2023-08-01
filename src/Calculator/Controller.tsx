@@ -75,6 +75,10 @@ export default class CalculatorController {
   };
 
   onPressEqual = () => {
+    if(this.state.actionClear) {
+      return;
+    }
+
     let state: IState = { ...this.state };
     let memory = parseFloat(state.memory);
     let buffer = parseFloat(state.buffer);
@@ -109,8 +113,5 @@ export default class CalculatorController {
     state.buffer = String(memory * (buffer / 100));
     this.setState(state);
   };
-
-
-
 
 }
