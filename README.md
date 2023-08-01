@@ -1,6 +1,6 @@
 # calculator
 
-![calculator screenshot.webp](assets%2Fcalculator%20screenshot.webp)
+<img src="./assets/screenshot.webp" alt="screenshot" width="200px" height="auto"/>
 
 ## About
 
